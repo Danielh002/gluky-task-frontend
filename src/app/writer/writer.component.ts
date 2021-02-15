@@ -17,15 +17,14 @@ export class WriterComponent implements OnInit, OnDestroy {
   constructor(private postService : PostService) { }
 
   ngOnInit(): void {
-    this.approvedPost$ = this.getPosts(Status.APPROVED);
-    this.pendingPost$ = this.getPosts(Status.PENDING);
+    this.approvedPost$ = this.getPosts([{"status" : Status.PENDING}]);
+    this.pendingPost$ = this.getPosts([{"status" : Status.PENDING}]);
     this._subs.add(this.approvedPost$.subscribe(noop));
     this._subs.add(this.pendingPost$.subscribe(noop)); 
   }
 
-  getPosts(status: Status){
-    let findPost = [{"status" : status}]
-    return this.postService.getPosts(findPost)
+  getPosts(searchQuery: Object){
+    return this.postService.getPosts(searchQuery)
   }
 
   ngOnDestroy(): void {
