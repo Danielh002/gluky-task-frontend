@@ -7,7 +7,7 @@ import { RoleService } from "../services/role.service";
 @Directive({
   selector: '[appHasRole]'
 })
-export class IfRolesDirective implements OnInit, OnDestroy {
+export class AppHasRole implements OnInit, OnDestroy {
   @Input() appHasRole: string;
   stop$ = new Subject();
   isVisible = false;

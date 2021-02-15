@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IfRolesDirective } from './directives/if-roles.directive';
+import { AppHasRole } from './directives/app-has-role.directive';
 import { HomeComponent } from './home/home.component';
 import { WriterComponent } from './writer/writer.component';
 import { EditorComponent } from './editor/editor.component';
@@ -17,7 +17,7 @@ import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authent
 @NgModule({
   declarations: [
     AppComponent,
-    IfRolesDirective,
+    AppHasRole,
     HomeComponent,
     WriterComponent,
     EditorComponent,
