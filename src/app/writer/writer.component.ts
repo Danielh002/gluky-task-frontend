@@ -27,6 +27,9 @@ export class WriterComponent implements OnInit, OnDestroy {
     return this.postService.getPosts(searchQuery)
   }
 
+  addPost(){
+  }
+
   ngOnDestroy(): void {
     this._subs.unsubscribe()
   }

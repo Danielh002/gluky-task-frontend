@@ -17,4 +17,8 @@ export class PostService {
   getPosts(searchAtt: Object) : Observable<Post[]> {
     return this.http.post<Post[]>(environment.server + this.postRoute, searchAtt).pipe(pluck('result'));
   }
+
+  addPost(newPost: Post) : Observable<Post[]> {
+    return this.http.post<Post[]>(environment.server + this.postRoute, newPost).pipe(pluck('result'));
+  }
 }
