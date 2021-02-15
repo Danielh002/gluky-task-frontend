@@ -1,6 +1,6 @@
-export interface Comment {
+export interface User {
     _id: String,
-    author: String,
-    comment: String,
-    createdAt: Date
+    name: String,
+    email: String,
+    role: Date
 }

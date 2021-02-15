@@ -1,3 +1,5 @@
+import { User } from "./user.model";
+
 export enum Status {
     PENDING, 
     APPROVED,
@@ -13,7 +15,7 @@ export interface Comment {
 
 export interface Post {
     _id: String,
-    authorId: String,
+    author: User,
     tittle: String,
     content: String,
     imageUrl?: String,
