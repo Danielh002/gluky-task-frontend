@@ -3,6 +3,7 @@ import { User } from "./user.model";
 export enum Status {
     PENDING, 
     APPROVED,
+    DENIED,
   }
 
 export interface Comment {

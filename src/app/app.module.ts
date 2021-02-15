@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { IfRolesDirective } from './directives/if-roles.directive';
 import { HomeComponent } from './home/home.component';
 import { WriterComponent } from './writer/writer.component';
+import { EditorComponent } from './editor/editor.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { WriterComponent } from './writer/writer.component';
     AppComponent,
     IfRolesDirective,
     HomeComponent,
-    WriterComponent
+    WriterComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
