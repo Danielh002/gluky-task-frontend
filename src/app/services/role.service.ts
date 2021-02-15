@@ -21,5 +21,3 @@ export class RoleService {
     this.roleUpdates$.next(roles);
   }
 }
-
-
