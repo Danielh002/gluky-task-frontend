@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +10,8 @@ import { IfRolesDirective } from './directives/if-roles.directive';
 import { HomeComponent } from './home/home.component';
 import { WriterComponent } from './writer/writer.component';
 import { EditorComponent } from './editor/editor.component';
+import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authenticated-view.component';
+
 
 
 @NgModule({
@@ -17,12 +20,15 @@ import { EditorComponent } from './editor/editor.component';
     IfRolesDirective,
     HomeComponent,
     WriterComponent,
-    EditorComponent
+    EditorComponent,
+    NoAuthenticatedViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,15 +1,16 @@
 import { Input, OnInit, Directive, ViewContainerRef, TemplateRef, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Subject, Subscription } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { RoleService } from "../services/role.service";
 
 
 @Directive({
-  selector: '[ifRoles]'
+  selector: '[appHasRole]'
 })
 export class IfRolesDirective implements OnInit, OnDestroy {
-  private subscription: Subscription[] = [];
-  // the role the user must have
-  @Input() public ifRoles: Array<string>;
+  @Input() appHasRole: string;
+  stop$ = new Subject();
+  isVisible = false;
 
   /**
    * @param {ViewContainerRef} viewContainerRef -- the location where we need to render the templateRef
@@ -22,29 +23,37 @@ export class IfRolesDirective implements OnInit, OnDestroy {
     private rolesService: RoleService
   ) {}
 
-  public ngOnInit(): void {
-    this.subscription.push(
-      this.rolesService.sharedVariable$.subscribe((res : Array<string> )=> {
-        if (!res) {
-          // Remove element from DOM
-          this.viewContainerRef.clear();
-        }
-        // user Role are checked by a Roles mention in DOM
-        const idx = res.findIndex((element) => this.ifRoles.indexOf(element) !== -1);
-        if (idx < 0) {
-          this.viewContainerRef.clear();
-        } else {
-          // appends the ref element to DOM
+  ngOnInit() {
+    //  We subscribe to the roles$ to know the roles the user has
+    this.rolesService.roles$.pipe(takeUntil(this.stop$)).subscribe(roles => {
+      // If he doesn't have any roles, we clear the viewContainerRef
+      if (!roles) {
+        this.viewContainerRef.clear();
+      }
+      // If the user has the role needed to
+      // render this component we can add it
+      if (roles.includes(this.appHasRole)) {
+        // If it is already visible (which can happen if
+        // his roles changed) we do not need to add it a second time
+        if (!this.isVisible) {
+          // We update the `isVisible` property and add the
+          // templateRef to the view using the
+          // 'createEmbeddedView' method of the viewContainerRef
+          this.isVisible = true;
           this.viewContainerRef.createEmbeddedView(this.templateRef);
         }
-      })
-    );
+      } else {
+        // If the user does not have the role,
+        // we update the `isVisible` property and clear
+        // the contents of the viewContainerRef
+        this.isVisible = false;
+        this.viewContainerRef.clear();
+      }
+    });
   }
 
-  /**
-   * on destroy cancels the API if its fetching.
-   */
-  public ngOnDestroy(): void {
-    this.subscription.forEach((subscription: Subscription) => subscription.unsubscribe());
+  // Clear the subscription on destroy
+  ngOnDestroy() {
+    this.stop$.next();
   }
 }

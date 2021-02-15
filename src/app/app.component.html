@@ -12,4 +12,13 @@
     </form>
 </nav>
 
-<app-writer></app-writer>
+
+
+<!-- Display only for Admin -->
+<app-editor *appHasRole='"EDITOR"'>...</app-editor>
+
+<!-- Display only for Admin & SuperAdmin -->
+<app-writer *appHasRole='"WRITER"'>...</app-writer>
+
+<!-- *ifRoles : using on HTML Elements -->
+<app-no-authenticated-view *appHasRole='"NO-AUTH"'>...</app-no-authenticated-view>  

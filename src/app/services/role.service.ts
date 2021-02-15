@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
-
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { scan } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
 
-  sharedVariable$ = new ReplaySubject(1);
-  constructor() { }
+  roles$ = new ReplaySubject<string[]>(1);
+  roleUpdates$ = new BehaviorSubject(['basic']);
 
-  updateValue(value: Array<String>) {
-    this.sharedVariable$.next(value);
+  constructor() {
+    this.roleUpdates$
+      .pipe(
+        scan((acc, next) => next, [])
+      )
+      .subscribe(this.roles$);
+  }
+
+  update(roles) {
+    this.roleUpdates$.next(roles);
   }
 }
 
