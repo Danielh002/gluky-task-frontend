@@ -1,0 +1,8 @@
+<!-- Display only for Admin -->
+<app-some-component *ifRoles='["Wirter"]'> ... </app-some-component>
+
+<!-- Display only for Admin & SuperAdmin -->
+<app-some-component *ifRoles='["Editor"]'> ... </app-some-component>
+
+<!-- *ifRoles : using on HTML Elements -->
+<section *ifRoles='[]'> ... </section>
