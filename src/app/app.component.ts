@@ -14,12 +14,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.roleService.update('WRITER')
-    // Listen to the changes from the form and update the roles
-    // the user has in the rolesService
-    /*this.roleForm.valueChanges
-      .pipe(map(mapRoleArrayToStringArray))
-      .subscribe(roles => this.rolesService.update(roles));
-      */
   }
 
 }

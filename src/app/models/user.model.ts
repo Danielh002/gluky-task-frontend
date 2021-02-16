@@ -1,6 +1,7 @@
 export interface User {
-    _id: String,
+    _id?: String,
     name: String,
     email: String,
-    role: Date
+    role?: Date,
+    imageUrl: String
 }

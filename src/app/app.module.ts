@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { WriterComponent } from './writer/writer.component';
 import { EditorComponent } from './editor/editor.component';
 import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authenticated-view.component';
+import { AuthButtonComponent } from './auth-button/auth-button.component';
 
 
 
@@ -21,7 +22,8 @@ import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authent
     HomeComponent,
     WriterComponent,
     EditorComponent,
-    NoAuthenticatedViewComponent
+    NoAuthenticatedViewComponent,
+    AuthButtonComponent
   ],
   imports: [
     BrowserModule,
