@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  createUser( name: string, userEmail: string, userImage: string) : Observable<User[]> {
+  createUser( name: string, userEmail: string, userImage: string) : Observable<User> {
     let newUser : User = {
       email: userEmail,
       name: name,

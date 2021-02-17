@@ -23,7 +23,7 @@ import { AuthButtonComponent } from './auth-button/auth-button.component';
     WriterComponent,
     EditorComponent,
     NoAuthenticatedViewComponent,
-    AuthButtonComponent
+    AuthButtonComponent  
   ],
   imports: [
     BrowserModule,

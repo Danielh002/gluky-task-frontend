@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   constructor(private roleService: RoleService){}
 
   ngOnInit() {
-    this.roleService.update('WRITER')
+    this.roleService.update('EDITOR')
   }
-
 }

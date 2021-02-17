@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { noop } from 'rxjs';
+import { RoleService } from '../services/role.service';
 import { UserService } from '../services/user.service';
+import { User} from '../models/user.model';
+import { AppCommonService } from '../services/app-common.service';
 
 declare var gapi : any;
 
@@ -16,13 +18,18 @@ export class AuthButtonComponent implements OnInit {
   public error: string;
   public user: gapi.auth2.GoogleUser;
 
-  constructor(private userService: UserService){
+  constructor(
+    private userService: UserService, 
+    private roleService : RoleService, 
+    private appCommonService: AppCommonService){
 }
 
   async ngOnInit() {
+    /*
     if (await this.checkIfUserAuthenticated()) {
       this.user = this.authInstance.currentUser.get();
     }
+    */
   }
 
   async initGoogleAuth(): Promise<void> {
@@ -51,12 +58,15 @@ export class AuthButtonComponent implements OnInit {
     return new Promise(async () => {
       await this.authInstance.signIn().then(
         user  => {
-          this.user = user
-          this.userService.createUser( user.getBasicProfile().getName() , user.getBasicProfile().getEmail(), user.getBasicProfile().getImageUrl()).subscribe(noop)
-          localStorage.setItem('idToken', this.user.getAuthResponse().id_token)
+          this.user = user;
+          this.userService.createUser( user.getBasicProfile().getName() , user.getBasicProfile().getEmail(), user.getBasicProfile().getImageUrl()).subscribe((result: User) => {
+            result.idToken = this.user.getAuthResponse().id_token;
+            this.appCommonService.updateUser(result);
+            this.roleService.update(result.role); 
+          })
         },
         error => this.error = error);
-    });
+    }); 
   }
 
   async checkIfUserAuthenticated(): Promise<boolean> {
