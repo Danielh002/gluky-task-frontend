@@ -10,10 +10,10 @@
 
 
 <!-- Display only for Admin -->
-<app-editor *appHasRole='"EDITOR"'></app-editor>
+<app-editor *ngIf="checkRole('EDITOR')"></app-editor>
 
 <!-- Display only for Admin & SuperAdmin -->
-<app-writer *appHasRole='"WRITER"'></app-writer>
+<app-writer *ngIf="checkRole('WRITER')"></app-writer>
 
 <!-- *ifRoles : using on HTML Elements -->
-<app-no-authenticated-view *appHasRole='"NO-AUTH"'></app-no-authenticated-view>  
+<app-no-authenticated-view *ngIf="checkRole('NO_AUTH')"></app-no-authenticated-view>  

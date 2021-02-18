@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from './services/role.service';
+import { Roles, User } from './models/user.model';
+import { AppCommonService } from './services/app-common.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,20 @@ import { RoleService } from './services/role.service';
 export class AppComponent implements OnInit {
 
   title = 'gluky-task-frontend';
+  currentRole: Roles = Roles.NO_AUTH;
 
-  constructor(private roleService: RoleService){}
+  constructor(public appCommonService: AppCommonService){}
 
   ngOnInit() {
-    this.roleService.update('EDITOR')
+    this.appCommonService.currentUser$.subscribe((user: User) => {
+      this.currentRole = user.role
+    })
+  }
+
+  checkRole(role: string){
+    if(this.currentRole == role){
+      return true;
+    }
+    return false;
   }
 }

@@ -1,7 +1,7 @@
-export interface Roles {
-    NO_AUTH : "NO_AUTH",
-    EDITOR : "EDITOR",
-    WRITER :"WRITER"
+export enum Roles {
+    NO_AUTH = "NO_AUTH",
+    EDITOR = "EDITOR",
+    WRITER = "WRITER"
 }
 
 export interface User {
