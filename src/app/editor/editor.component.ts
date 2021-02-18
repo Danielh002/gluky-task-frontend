@@ -13,8 +13,8 @@ import { PostService } from '../services/post.service';
 })
 export class EditorComponent implements OnInit {
   _subs: Subscription = new Subscription();
-  approvedPost$: Observable<Array<Post>>; 
-  pendingPost$: Observable<Array<Post>>; 
+  approvedPost: Array<Post>; 
+  pendingPost: Array<Post>; 
   addPostForm: FormGroup;
   currentUser: User = { email: "Loading", name: "Loading"}; 
 
@@ -28,10 +28,9 @@ export class EditorComponent implements OnInit {
       this.currentUser = user;
       this.postService.setHttpHeader(user.idToken)
     })
-    this.approvedPost$ = this.getPosts([{propName : "status", value: Status.APPROVED}]);
-    this.pendingPost$ = this.getPosts([{propName : "status", value: Status.PENDING}]);
-    this._subs.add(this.approvedPost$.subscribe(noop));
-    this._subs.add(this.pendingPost$.subscribe(noop)); 
+    this.getPosts([{propName : "status", value: Status.APPROVED}]).subscribe((result: Post[]) => this.approvedPost = result);
+    this.getPosts([{propName : "status", value: Status.PENDING}]).subscribe((result: Post[]) => this.pendingPost = result);
+
     this.addPostForm = new FormGroup({
       postTittle: new FormControl('', [Validators.required, Validators.minLength(1),]),
       postContent: new FormControl('', [Validators.required, Validators.minLength(1),]),
@@ -45,18 +44,27 @@ export class EditorComponent implements OnInit {
 
   addPost(){
     if(this.addPostForm.valid){
-      this.postService.addPost(this.currentUser._id, this.addPostForm.get('postTittle').value, this.addPostForm.get('postContent').value,  Status.APPROVED).subscribe((noop))
+      this.postService.addPost(this.currentUser._id, this.addPostForm.get('postTittle').value, this.addPostForm.get('postContent').value,  Status.APPROVED).subscribe((result : Post) => this.approvedPost.push(result))
     }
   }
 
   updatePost(postId:string, newStatus: string ){
     let status : Status = Status[newStatus];
-    if(this.addPostForm.valid){
-      this.postService.updateStatus(postId, status).subscribe((noop))
-    }
+    this.postService.updateStatus(postId, status).subscribe((result: Post) => {
+      let index = this.pendingPost.findIndex((element: Post) => element._id == postId );
+      if( index > -1){
+        console.log(this.pendingPost);
+        console.log(index);
+        this.pendingPost[index].status = status;
+        this.approvedPost.push(this.pendingPost[index]);
+        this.pendingPost.splice(index, 1);
+        
+      }
+    })
   }
 
+
+
   ngOnDestroy(): void {
-    this._subs.unsubscribe()
   }
 }

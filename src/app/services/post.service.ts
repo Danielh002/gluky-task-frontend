@@ -29,14 +29,13 @@ export class PostService {
   }
 
   addPost(author: string, title: string, content: string, status: Status) : Observable<Post> {
-    console.log(this._httpHeader);
     let newPost : Post = { author: author,  content: content , tittle: title, status: status  }
     return this.http.post<Post[]>(environment.server + this.postRoute, newPost, { headers: this._httpHeader}).pipe(pluck('result'));
   }
 
   updateStatus(postId: string, newStatus: Status) : Observable<Post> {
     let updateOp = [{"propName" : "status", "value": newStatus}]
-    return this.http.post<Post[]>(environment.server + this.postRoute + '/' + postId, updateOp, { headers: this._httpHeader}).pipe(pluck('result'));
+    return this.http.patch<Post[]>(environment.server + this.postRoute + '/' + postId, updateOp, { headers: this._httpHeader}).pipe(pluck('result'));
   }
 
   updateContentTitle(postId: string, newTitle: string, newContent: string) : Observable<Post> {
