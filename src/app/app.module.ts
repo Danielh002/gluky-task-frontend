@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppHasRole } from './directives/app-has-role.directive';
 import { HomeComponent } from './home/home.component';
 import { WriterComponent } from './writer/writer.component';
 import { EditorComponent } from './editor/editor.component';
@@ -18,7 +17,6 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
-    AppHasRole,
     HomeComponent,
     WriterComponent,
     EditorComponent,
