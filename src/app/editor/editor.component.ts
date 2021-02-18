@@ -5,7 +5,6 @@ import { Post, Status } from '../models/post.model';
 import { User } from '../models/user.model';
 import { AppCommonService } from '../services/app-common.service';
 import { PostService } from '../services/post.service';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-editor',
@@ -25,12 +24,10 @@ export class EditorComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    console.log("EDITOR VIEW CHARING");
     this.appCommonService.currentUser$.subscribe((user: User) => {
       this.currentUser = user;
       this.postService.setHttpHeader(user.idToken)
     })
-
     this.approvedPost$ = this.getPosts([{propName : "status", value: Status.APPROVED}]);
     this.pendingPost$ = this.getPosts([{propName : "status", value: Status.PENDING}]);
     this._subs.add(this.approvedPost$.subscribe(noop));
