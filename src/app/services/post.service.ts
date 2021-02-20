@@ -47,11 +47,7 @@ export class PostService {
     return this.http.post<Post>(environment.server + this.postRoute + '/' + postId, updateOp, { headers: this._httpHeader}).pipe(pluck('result'));
   }
 
-  addComment(postId: string,  author: string, comment: string) : Observable<Post> {
-    let newComment: Comment = {
-      author: author,
-      comment: comment
-    }
+  addComment( postId: string, newComment: Comment) : Observable<Post> {
     return this.http.post<Post>(environment.server + this.postRoute + '/' + postId, newComment).pipe(pluck('result'));
   }
 }

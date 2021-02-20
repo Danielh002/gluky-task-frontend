@@ -23,5 +23,5 @@ export interface Post {
     createdAt?: Date,
     updateAt?: Date,
     status?: Status,
-    comments?: [Array<Comment>]
+    comments?: Array<Comment>
 }

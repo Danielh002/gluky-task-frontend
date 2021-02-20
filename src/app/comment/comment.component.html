@@ -1,0 +1,63 @@
+<a class="card-link" (click)=" showComment = !showComment"><i class="fa fa-comment"></i> Comment</a>
+<div class="container" *ngIf="showComment">
+    <div class="row">
+        <div class="col-12">
+            <div class="comments">
+                <div class="comments-details">
+                    <span class="total-comments comments-sort">117 Comments</span>
+                    <span class="dropdown">
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Top Comments</a>
+                            <a href="#" class="dropdown-item">Newest First</a>
+                        </div>
+                    </span>
+                </div>
+                <ng-container>
+                    <form [formGroup]="addCommentForm">
+                        <div class="comment-box add-comment">
+                            <span class="commenter-pic">
+                                <img src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                                    class="img-fluid">
+                            </span>
+                            <span class="commenter-name">
+                                <input type="text" formControlName="commentContent" placeholder="Add a public comment"
+                                    name="Add Comment">
+                                <button type="submit" class="btn btn-default" (click)='addComment()'>Comment</button>
+                                <button type="cancel" class="btn btn-default">Cancel</button>
+                            </span>
+                        </div>
+                    </form>
+                </ng-container>
+                <div *ngFor='let comment of post.comments' class="comment-box">
+                    <span class="commenter-pic">
+                        <img src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                            class="img-fluid">
+                    </span>
+                    <span class="commenter-name">
+                        <a href="#">{{comment.author}}</a> <span class="comment-time">2 hours ago</span>
+                    </span>
+                    <p class="comment-txt more">{{comment.comment}}.</p>
+                    <div class="comment-meta">
+                        <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                            99</button>
+                        <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                            149</button>
+                        <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i>
+                            Reply</button>
+                    </div>
+                    <div class="comment-box add-comment reply-box">
+                        <span class="commenter-pic">
+                            <img src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                                class="img-fluid">
+                        </span>
+                        <span class="commenter-name">
+                            <input type="text" placeholder="Add a public reply" name="Add Comment">
+                            <button type="submit" class="btn btn-default">Reply</button>
+                            <button type="cancel" class="btn btn-default reply-popup">Cancel</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

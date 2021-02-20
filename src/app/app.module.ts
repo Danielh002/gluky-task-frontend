@@ -13,6 +13,7 @@ import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authent
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { SocialLoginModule, SocialAuthServiceConfig ,  GoogleLoginProvider} from 'angularx-social-login';
 import { CommonModule } from '@angular/common';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CommonModule } from '@angular/common';
     WriterComponent,
     EditorComponent,
     NoAuthenticatedViewComponent,
-    AuthButtonComponent  
+    AuthButtonComponent,
+    CommentComponent  
   ],
   imports: [
     BrowserModule,

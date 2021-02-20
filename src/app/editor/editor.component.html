@@ -20,7 +20,6 @@
             </div>
         </div>
         <div class="col-md-6 gedf-main">
-
             <!--- \\\\\\\Post-->
             <form [formGroup]="addPostForm" class="card gedf-card">
                 <div class="card-header">
@@ -75,61 +74,60 @@
                     </div>
                 </div>
             </form>
-
-
             <!-- Post /////-->
-
-            <div class="container" *ngFor='let approvedPost of approvedPost'>
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
+                <div class="container" *ngFor='let approvedPost of approvedPosts'>
+                    <div class="card gedf-card">
+                        <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                    </div>
+                                    <div class="ml-2">
+                                        <div class="h5 m-0"> {{approvedPost.author.name}}</div>
+                                        <div class="h7 text-muted">{{approvedPost.author.email}}</div>
+                                    </div>
                                 </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0"> {{approvedPost.author.name}}</div>
-                                    <div class="h7 text-muted">{{approvedPost.author.email}}</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <div class="h6 dropdown-header">Configuration</div>
-                                        <a class="dropdown-item" href="#">Save</a>
-                                        <a class="dropdown-item" href="#">Hide</a>
-                                        <a class="dropdown-item" href="#">Report</a>
+                                <div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-h"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                            <div class="h6 dropdown-header">Configuration</div>
+                                            <a class="dropdown-item" href="#">Save</a>
+                                            <a class="dropdown-item" href="#">Hide</a>
+                                            <a class="dropdown-item" href="#">Report</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+    
                         </div>
-
-                    </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                        <a class="card-link" href="#">
-                            <h5 class="card-title">{{approvedPost.tittle}}</h5>
-                        </a>
-
-                        <p class="card-text">
-                            {{approvedPost.content}}
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                        <div class="card-body">
+                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                            <a class="card-link" href="#">
+                                <h5 class="card-title">{{approvedPost.tittle}}</h5>
+                            </a>
+    
+                            <p class="card-text">
+                                {{approvedPost.content}}
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                            <app-comment class="card-link" [post]='approvedPost' [user]='currentUser' 
+                            ></app-comment>
+                        </div>
+                        
                     </div>
                 </div>
-            </div>
         </div>
 
         <div class="col-md-3">
-            <div class="card gedf-card" *ngFor='let pendingPost of pendingPost'>
+            <div class="card gedf-card" *ngFor='let pendingPost of pendingPosts'>
                 <div class="card-body">
                     <h5 class="card-title">{{pendingPost.tittle}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">PENDING FOR APPROVE</h6>

@@ -13,8 +13,8 @@ import { PostService } from '../services/post.service';
 })
 export class EditorComponent implements OnInit {
   _subs: Subscription = new Subscription();
-  approvedPost: Array<Post>; 
-  pendingPost: Array<Post>; 
+  approvedPosts: Array<Post>; 
+  pendingPosts: Array<Post>; 
   addPostForm: FormGroup;
   currentUser: User = { email: "Loading", name: "Loading"}; 
 
@@ -28,8 +28,8 @@ export class EditorComponent implements OnInit {
       this.currentUser = user;
       this.postService.setHttpHeader(user.idToken)
     })
-    this.getPosts([{propName : "status", value: Status.APPROVED}]).subscribe((result: Post[]) => this.approvedPost = result);
-    this.getPosts([{propName : "status", value: Status.PENDING}]).subscribe((result: Post[]) => this.pendingPost = result);
+    this.getPosts([{propName : "status", value: Status.APPROVED}]).subscribe((result: Post[]) => this.approvedPosts = result);
+    this.getPosts([{propName : "status", value: Status.PENDING}]).subscribe((result: Post[]) => this.pendingPosts = result);
 
     this.addPostForm = new FormGroup({
       postTittle: new FormControl('', [Validators.required, Validators.minLength(1),]),
@@ -44,20 +44,20 @@ export class EditorComponent implements OnInit {
 
   addPost(){
     if(this.addPostForm.valid){
-      this.postService.addPost(this.currentUser._id, this.addPostForm.get('postTittle').value, this.addPostForm.get('postContent').value,  Status.APPROVED).subscribe((result : Post) => this.approvedPost.push(result))
+      this.postService.addPost(this.currentUser._id, this.addPostForm.get('postTittle').value, this.addPostForm.get('postContent').value,  Status.APPROVED).subscribe((result : Post) => this.approvedPosts.push(result))
     }
   }
 
   updatePost(postId:string, newStatus: string ){
     let status : Status = Status[newStatus];
     this.postService.updateStatus(postId, status).subscribe((result: Post) => {
-      let index = this.pendingPost.findIndex((element: Post) => element._id == postId );
+      let index = this.pendingPosts.findIndex((element: Post) => element._id == postId );
       if( index > -1){
-        console.log(this.pendingPost);
+        console.log(this.pendingPosts);
         console.log(index);
-        this.pendingPost[index].status = status;
-        this.approvedPost.push(this.pendingPost[index]);
-        this.pendingPost.splice(index, 1);
+        this.pendingPosts[index].status = status;
+        this.approvedPosts.push(this.pendingPosts[index]);
+        this.pendingPosts.splice(index, 1);
         
       }
     })
