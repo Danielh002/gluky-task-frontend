@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { noop } from 'rxjs';
-import { Post, Status } from '../models/post.model';
-import { User } from '../models/user.model';
-import { AppCommonService } from '../services/app-common.service';
-import { PostService } from '../services/post.service';
+import { Post, Status } from '../../models/post.model';
+import { User } from '../../models/user.model';
+import { AppCommonService } from '../../services/app-common.service';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-post',

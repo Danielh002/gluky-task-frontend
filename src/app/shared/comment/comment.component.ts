@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Comment, Post } from '../models/post.model';
-import { User } from '../models/user.model';
-import { PostService } from '../services/post.service';
+import { Comment, Post } from '../../models/post.model';
+import { User } from '../../models/user.model';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-comment',

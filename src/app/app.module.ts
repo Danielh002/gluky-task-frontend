@@ -13,8 +13,9 @@ import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authent
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { SocialLoginModule, SocialAuthServiceConfig ,  GoogleLoginProvider} from 'angularx-social-login';
 import { CommonModule } from '@angular/common';
-import { CommentComponent } from './comment/comment.component';
-import { PostComponent } from './post/post.component';
+import { CommentComponent } from './shared/comment/comment.component';
+import { PostComponent } from './shared/post/post.component';
+import { ProfileInfoComponent } from './shared/profile-info/profile-info.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PostComponent } from './post/post.component';
     NoAuthenticatedViewComponent,
     AuthButtonComponent,
     CommentComponent,
-    PostComponent  
+    PostComponent,
+    ProfileInfoComponent
   ],
   imports: [
     BrowserModule,
