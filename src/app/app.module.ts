@@ -14,6 +14,7 @@ import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { SocialLoginModule, SocialAuthServiceConfig ,  GoogleLoginProvider} from 'angularx-social-login';
 import { CommonModule } from '@angular/common';
 import { CommentComponent } from './comment/comment.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CommentComponent } from './comment/comment.component';
     EditorComponent,
     NoAuthenticatedViewComponent,
     AuthButtonComponent,
-    CommentComponent  
+    CommentComponent,
+    PostComponent  
   ],
   imports: [
     BrowserModule,

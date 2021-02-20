@@ -15,7 +15,6 @@ export class EditorComponent implements OnInit {
   _subs: Subscription = new Subscription();
   approvedPosts: Array<Post>; 
   pendingPosts: Array<Post>; 
-  addPostForm: FormGroup;
   currentUser: User = { email: "Loading", name: "Loading"}; 
 
   constructor(
@@ -30,23 +29,12 @@ export class EditorComponent implements OnInit {
     })
     this.getPosts([{propName : "status", value: Status.APPROVED}]).subscribe((result: Post[]) => this.approvedPosts = result);
     this.getPosts([{propName : "status", value: Status.PENDING}]).subscribe((result: Post[]) => this.pendingPosts = result);
-
-    this.addPostForm = new FormGroup({
-      postTittle: new FormControl('', [Validators.required, Validators.minLength(1),]),
-      postContent: new FormControl('', [Validators.required, Validators.minLength(1),]),
-    });
-
   }
 
   getPosts(searchQuery: Object){
     return this.postService.getPosts(searchQuery)
   }
 
-  addPost(){
-    if(this.addPostForm.valid){
-      this.postService.addPost(this.currentUser._id, this.addPostForm.get('postTittle').value, this.addPostForm.get('postContent').value,  Status.APPROVED).subscribe((result : Post) => this.approvedPosts.push(result))
-    }
-  }
 
   updatePost(postId:string, newStatus: string ){
     let status : Status = Status[newStatus];
@@ -62,8 +50,6 @@ export class EditorComponent implements OnInit {
       }
     })
   }
-
-
 
   ngOnDestroy(): void {
   }
