@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
     this.appCommonService.currentUser$.subscribe((user: User) => {
       this.currentUser = user
     })
+
+    this.appCommonService.updateUser(this.currentUser);
   }
 
   checkRole(role: string){
