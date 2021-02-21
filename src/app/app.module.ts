@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { HomeComponent } from './home/home.component';
 import { WriterComponent } from './writer/writer.component';
 import { EditorComponent } from './editor/editor.component';
 import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authenticated-view.component';
@@ -26,7 +25,6 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     WriterComponent,
     EditorComponent,
     NoAuthenticatedViewComponent,

@@ -1,7 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { AuthButtonComponent } from './auth-button/auth-button.component';
+import { EditorComponent } from './editor/editor.component';
+import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authenticated-view.component';
 import { AppCommonService } from './services/app-common.service';
+import { WriterComponent } from './writer/writer.component';
 
 
  beforeEach(async () => {
@@ -10,7 +14,11 @@ import { AppCommonService } from './services/app-common.service';
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        AuthButtonComponent,
+        NoAuthenticatedViewComponent,
+        WriterComponent,
+        EditorComponent
       ],
       providers: [AppCommonService]
     }).compileComponents();

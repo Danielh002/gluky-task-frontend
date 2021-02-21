@@ -7,13 +7,6 @@
     </form>
 </nav>
 
-
-
-<!-- Display only for Admin -->
 <app-editor *ngIf="checkRole('EDITOR')"></app-editor>
-
-<!-- Display only for Admin & SuperAdmin -->
 <app-writer *ngIf="checkRole('WRITER')"></app-writer>
-
-<!-- *ifRoles : using on HTML Elements -->
 <app-no-authenticated-view *ngIf="checkRole('NO_AUTH')"></app-no-authenticated-view>  

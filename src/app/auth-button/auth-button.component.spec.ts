@@ -1,4 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SocialAuthService } from 'angularx-social-login';
 
 import { AuthButtonComponent } from './auth-button.component';
 
@@ -8,7 +10,12 @@ describe('AuthButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthButtonComponent ]
+      declarations: [ AuthButtonComponent ],
+      imports:[HttpClientModule],
+      providers: [{ 
+        provide: SocialAuthService,
+        useValue: {}
+      }]
     })
     .compileComponents();
   });
