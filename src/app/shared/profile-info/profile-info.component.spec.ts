@@ -1,25 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { render, screen, fireEvent, RenderComponentOptions } from '@testing-library/angular'
 import { ProfileInfoComponent } from './profile-info.component';
 
+
+
 describe('ProfileInfoComponent', () => {
-  let component: ProfileInfoComponent;
-  let fixture: ComponentFixture<ProfileInfoComponent>;
+  let componentConfiguration: RenderComponentOptions<ProfileInfoComponent> = {
+    providers: [],
+    declarations: [
+      ProfileInfoComponent,
+    ],    
+    componentProperties: {
+      user: { email: "Loading", name: "Loading" }
+    },
+  }
+  
+  test('should have title counter', async () => {
+    await render(ProfileInfoComponent, componentConfiguration)
+    expect(screen.getAllByText('Loading'))
+  })
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ProfileInfoComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileInfoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+})
