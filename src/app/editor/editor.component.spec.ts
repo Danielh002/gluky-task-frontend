@@ -57,6 +57,4 @@ describe('EditorComponent', () => {
     await render(EditorComponent, componentConfiguration)
     expect(screen.getAllByText('Deny'))
   })
-
-
 })
