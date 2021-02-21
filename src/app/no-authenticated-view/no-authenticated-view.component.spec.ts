@@ -1,25 +1,49 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NoAuthenticatedViewComponent } from './no-authenticated-view.component';
+import { render, screen, RenderComponentOptions } from '@testing-library/angular'
+import { NoAuthenticatedViewComponent } from './no-authenticated-view.component'
+import { PostService } from '../services/post.service';
+import { AppCommonService } from '../services/app-common.service';
+import { ProfileInfoComponent } from '../shared/profile-info/profile-info.component';
+import { PostComponent } from '../shared/post/post.component';
+import { MatDialog } from '@angular/material/dialog';
+import { of } from 'rxjs';
+import { Post } from '../models/post.model';
+import { CommentComponent } from '../shared/comment/comment.component';
+
+
 
 describe('NoAuthenticatedViewComponent', () => {
-  let component: NoAuthenticatedViewComponent;
-  let fixture: ComponentFixture<NoAuthenticatedViewComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ NoAuthenticatedViewComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(NoAuthenticatedViewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  let componentConfiguration: RenderComponentOptions<NoAuthenticatedViewComponent> = {
+    providers: [{
+      provide: PostService,
+      useValue: {
+        getPosts: () => {
+          let post : Post = {
+            author : "Test",
+            content: "Test",
+            tittle: "Tittle"
+          }
+          return of([post])
+        }
+      }
+    },
+    { provide: AppCommonService, useClass: AppCommonService },
+    { provide: MatDialog, useValue: {} }
+    ],
+    declarations: [
+      ProfileInfoComponent,
+      PostComponent,
+      CommentComponent
+    ],
+    
+    componentProperties: {
+      approvedPosts: [],
+      currentUser: { email: "Loading", name: "Loading" }
+    },
+  }
+  
+  test('should have title counter', async () => {
+    await render(NoAuthenticatedViewComponent, componentConfiguration)
+    expect(screen.getAllByText('Loading'))
+  })
+})
