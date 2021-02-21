@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, RenderComponentOptions } from '@testing-library/angular'
+import { render, screen, RenderComponentOptions } from '@testing-library/angular'
 import { EditorComponent } from './editor.component'
 import { PostService } from '../services/post.service';
 import { AppCommonService } from '../services/app-common.service';
