@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class AppCommonService {
-  currentUser$ = new ReplaySubject(1);
+  public currentUser$ = new ReplaySubject(1);
 
   updateUser(user: User){
     this.currentUser$.next(user);

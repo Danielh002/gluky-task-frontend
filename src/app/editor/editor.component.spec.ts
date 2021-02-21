@@ -1,25 +1,67 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { render, screen, fireEvent, RenderComponentOptions } from '@testing-library/angular'
+import { EditorComponent } from './editor.component'
+import { PostService } from '../services/post.service';
+import { AppCommonService } from '../services/app-common.service';
+import { ProfileInfoComponent } from '../shared/profile-info/profile-info.component';
+import { PostComponent } from '../shared/post/post.component';
+import { MatDialog } from '@angular/material/dialog';
+import { of } from 'rxjs';
+import { Post } from '../models/post.model';
+import { CommentComponent } from '../shared/comment/comment.component';
 
-import { EditorComponent } from './editor.component';
+
 
 describe('EditorComponent', () => {
-  let component: EditorComponent;
-  let fixture: ComponentFixture<EditorComponent>;
+  let componentConfiguration: RenderComponentOptions<EditorComponent> = {
+    providers: [{
+      provide: PostService,
+      useValue: {
+        getPosts: () => {
+          let post : Post = {
+            author : "Test",
+            content: "Test",
+            tittle: "Tittle"
+          }
+          return of([post])
+        }
+      }
+    },{
+      provide: AppCommonService,
+      useClass: AppCommonService,
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ EditorComponent ]
-    })
-    .compileComponents();
-  });
+    },{
+      provide: MatDialog,
+      useValue: {}
+    }
+    ],
+    declarations: [
+      ProfileInfoComponent,
+      PostComponent,
+      CommentComponent
+    ],
+    
+    componentProperties: {
+      approvedPosts: [],
+      pendingPosts: [],
+      currentUser: { email: "Loading", name: "Loading" }
+    },
+  }
+  
+  test('should have title counter', async () => {
+    await render(EditorComponent, componentConfiguration)
+    expect(screen.getAllByText('Loading'))
+  })
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EditorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    
+  test('should have button with accept', async () => {
+    await render(EditorComponent, componentConfiguration)
+    expect(screen.getAllByText('Accept'))
+  })
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  test('should have button with deny', async () => {
+    await render(EditorComponent, componentConfiguration)
+    expect(screen.getAllByText('Deny'))
+  })
+
+
+})

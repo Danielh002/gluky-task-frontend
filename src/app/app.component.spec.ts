@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { AppCommonService } from './services/app-common.service';
 
-describe('AppComponent', () => {
-  beforeEach(async () => {
+
+ beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -11,6 +12,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [AppCommonService]
     }).compileComponents();
   });
 
