@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post, Status } from '../models/post.model';
 import { PostService } from '../services/post.service';
-import { noop, Observable, Subscription } from 'rxjs';
 import { AppCommonService } from '../services/app-common.service';
+import { User } from '../models/user.model';
 
 
 @Component({
@@ -11,28 +11,34 @@ import { AppCommonService } from '../services/app-common.service';
   styleUrls: ['./writer.component.css']
 })
 export class WriterComponent implements OnInit, OnDestroy {
-  _subs: Subscription = new Subscription();
-  approvedPost$: Observable<Array<Post>>; 
-  deniedPost$: Observable<Array<Post>>; 
+  approvedPost: Array<Post>; 
+  deniedPost: Array<Post>; 
+  currentUser: User = { email: "Loading", name: "Loading"}; 
   
-  constructor(private postService : PostService, public appCommonService: AppCommonService) { }
+  constructor(
+    private postService : PostService, 
+    public appCommonService: AppCommonService) { }
 
   ngOnInit(): void {
-    console.log("WRITER CHARGING");
-    this.approvedPost$ = this.getPosts([{"status" : Status.APPROVED}]);
-    this.deniedPost$ = this.getPosts([{"status" : Status.DENIED}]);
-    this._subs.add(this.approvedPost$.subscribe(noop));
-    this._subs.add(this.deniedPost$.subscribe(noop)); 
+    this.getPosts([{propName : "status", value: Status.APPROVED}]).subscribe((result: Post[]) => this.approvedPost = result);
+    this.getPosts([{propName : "status", value: Status.DENIED}]).subscribe((result: Post[]) => this.deniedPost = result);
   }
 
   getPosts(searchQuery: Object){
     return this.postService.getPosts(searchQuery)
   }
 
-  addPost(){
+  updatePost(postId:string, newStatus: string ){
+    let status : Status = Status[newStatus];
+    this.postService.updateStatus(postId, status).subscribe((_) => {
+      let index = this.deniedPost.findIndex((element: Post) => element._id == postId );
+      if( index > -1){
+        this.deniedPost[index].status = status;
+        this.deniedPost.splice(index, 1);
+      }
+    })
   }
 
   ngOnDestroy(): void {
-    this._subs.unsubscribe()
   }
 }

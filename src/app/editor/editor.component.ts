@@ -12,7 +12,6 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
-  _subs: Subscription = new Subscription();
   approvedPosts: Array<Post>; 
   pendingPosts: Array<Post>; 
   currentUser: User = { email: "Loading", name: "Loading"}; 
@@ -41,8 +40,6 @@ export class EditorComponent implements OnInit {
     this.postService.updateStatus(postId, status).subscribe((result: Post) => {
       let index = this.pendingPosts.findIndex((element: Post) => element._id == postId );
       if( index > -1){
-        console.log(this.pendingPosts);
-        console.log(index);
         this.pendingPosts[index].status = status;
         this.approvedPosts.push(this.pendingPosts[index]);
         this.pendingPosts.splice(index, 1);
