@@ -32,12 +32,10 @@ export class CommentComponent implements OnInit {
   }
 
   addComment(): void{
-    console.log('antes');
     if(this.addCommentForm.valid){
       let newComment: Comment = { _id: this.post._id, author:this.user.name, comment: this.addCommentForm.get('commentContent').value, createdAt: new Date()}
       this.postService.addComment(this.post._id, newComment).subscribe((_) => {
         this.post.comments.push(newComment)
-        console.log(this.post);
       })
     }
   }

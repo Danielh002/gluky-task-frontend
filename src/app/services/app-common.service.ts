@@ -9,7 +9,6 @@ export class AppCommonService {
   currentUser$ = new ReplaySubject(1);
 
   updateUser(user: User){
-    console.log("updatingUser", user);
     this.currentUser$.next(user);
   }
 }

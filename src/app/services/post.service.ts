@@ -20,12 +20,15 @@ export class PostService {
     this._httpHeader= new HttpHeaders({
       'token' : idToken
     })
-    console.log(this._httpHeader);
   }
 
 
   getPosts(searchAtt: Object) : Observable<Post[]> {
     return this.http.post<Post[]>(environment.server + this.postsRoute, searchAtt).pipe(pluck('result'));
+  }
+
+  getPostsByStatusAndEmail(status: Status, email: string) : Observable<Post[]> {
+    return this.http.get<Post[]>(environment.server + this.postsRoute + '/' + status + '/' + email ).pipe(pluck('result'));
   }
 
   addPost(author: string, title: string, content: string, status: Status) : Observable<Post> {

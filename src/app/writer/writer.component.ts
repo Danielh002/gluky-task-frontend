@@ -29,16 +29,19 @@ export class WriterComponent implements OnInit, OnDestroy {
       this.postService.setHttpHeader(user.idToken)
     })
     this.getPosts([{propName : "status", value: Status.APPROVED}]).subscribe((result: Post[]) => this.approvedPosts = result);
-    this.getPosts([{propName : "status", value: Status.DENIED},{propName : "email", value: this.currentUser.email}]
-      ).subscribe((result: Post[]) => {
+    this.getPostsByStatusAndEmail( Status.DENIED, this.currentUser.email).subscribe((result: Post[]) => {
       this.deniedPosts = result;
-      console.log(this.deniedPosts);
     })
   }
 
   getPosts(searchQuery: Object){
     return this.postService.getPosts(searchQuery)
   }
+
+  getPostsByStatusAndEmail(status: Status, email: string){
+    return this.postService.getPostsByStatusAndEmail(status, email)
+  }
+
 
   openUpdateDialog(postId: string){
     let index = this.deniedPosts.findIndex((element: Post) => element._id == postId );
