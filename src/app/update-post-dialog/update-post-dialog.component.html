@@ -1,0 +1,20 @@
+<h2 mat-dialog-title> Update post: </h2>
+
+<div class="container">
+    <div class="row">
+        <form [formGroup]="updatePostForm">
+            <mat-form-field claas="col-md-12" appearance="fill">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="postTitle">
+            </mat-form-field>
+            <mat-form-field claas="col-md-12" appearance="fill">
+                <mat-label>Content</mat-label>
+                <textarea matInput formControlName="postContent"></textarea>
+            </mat-form-field>
+            <mat-dialog-actions>
+                <button class="btn btn-light" (click)="close()">Close</button>
+                <button class="btn btn-primary" (click)="save()">Save</button>
+            </mat-dialog-actions>
+        </form>
+    </div>
+</div>

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription, Observable, noop } from 'rxjs';
 import { Post, Status } from '../models/post.model';
 import { User } from '../models/user.model';
 import { AppCommonService } from '../services/app-common.service';
@@ -43,7 +41,6 @@ export class EditorComponent implements OnInit {
         this.pendingPosts[index].status = status;
         this.approvedPosts.push(this.pendingPosts[index]);
         this.pendingPosts.splice(index, 1);
-        
       }
     })
   }

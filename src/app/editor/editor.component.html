@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{pendingPost.tittle}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">PENDING FOR APPROVE</h6>
-                    <p class="card-text">{{pendingPost.content}}.</p>
+                    <p class="card-text">{{pendingPost.content}}</p>
                     <button  class="card-link" (click)='updatePost(pendingPost._id, "APPROVED")'>Accept</button>
                     <button  class="card-link" (click)='updatePost(pendingPost._id, "DENIED")'>Deny</button>
                 </div>

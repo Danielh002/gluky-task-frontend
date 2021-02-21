@@ -16,7 +16,12 @@ import { CommonModule } from '@angular/common';
 import { CommentComponent } from './shared/comment/comment.component';
 import { PostComponent } from './shared/post/post.component';
 import { ProfileInfoComponent } from './shared/profile-info/profile-info.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { UpdatePostDialogComponent } from './update-post-dialog/update-post-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,16 +32,22 @@ import { ProfileInfoComponent } from './shared/profile-info/profile-info.compone
     AuthButtonComponent,
     CommentComponent,
     PostComponent,
-    ProfileInfoComponent
+    ProfileInfoComponent,
+    UpdatePostDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule 
   ],
   providers: [ {
     provide: 'SocialAuthServiceConfig',
@@ -52,6 +63,8 @@ import { ProfileInfoComponent } from './shared/profile-info/profile-info.compone
       ]
     } as SocialAuthServiceConfig,
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [UpdatePostDialogComponent, ConfirmationDialogComponent]
+
 })
 export class AppModule { }

@@ -44,7 +44,7 @@ export class PostService {
       {"propName" : "content", "value": newContent},
       {"propName" : "status", "value": Status.PENDING},
     ];
-    return this.http.post<Post>(environment.server + this.postRoute + '/' + postId, updateOp, { headers: this._httpHeader}).pipe(pluck('result'));
+    return this.http.patch<Post>(environment.server + this.postRoute + '/' + postId, updateOp, { headers: this._httpHeader}).pipe(pluck('result'));
   }
 
   addComment( postId: string, newComment: Comment) : Observable<Post> {

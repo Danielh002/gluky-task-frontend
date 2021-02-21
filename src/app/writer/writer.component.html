@@ -1,14 +1,14 @@
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <app-profile-info class="col-md-3" [user]='currentUser'></app-profile-info>
-        <app-post class="col-md-6 gedf-main" [posts]='approvedPost' [user]='currentUser'> </app-post>
+        <app-post class="col-md-6 gedf-main" [posts]='approvedPosts' [user]='currentUser'> </app-post>
         <div class="col-md-3">
-            <div class="card gedf-card" *ngFor='let pendingPost of approvedPost'>
+            <div class="card gedf-card" *ngFor='let deniedPost of deniedPosts'>
                 <div class="card-body">
-                    <h5 class="card-title">{{pendingPost.tittle}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Penging to update</h6>
-                    <p class="card-text">{{pendingPost.content}}.</p>
-                    <button  class="card-link" (click)='updatePost(pendingPost._id, "APPROVED")'>Accept</button>
+                    <h5 class="card-title">{{deniedPost.tittle}}</h5>
+                    <h6 class="card-subtitle mb-2 denidPost-muted">DENIED POST PENDING TO UPDATE</h6>
+                    <p class="card-text">{{deniedPost.content}}</p>
+                    <button class="btn btn-primary" (click)='openUpdateDialog(deniedPost._id, "APPROVED")'>Update</button>
                 </div>
             </div>
         </div>
