@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 import { HomeComponent } from './home/home.component';
 import { WriterComponent } from './writer/writer.component';
 import { EditorComponent } from './editor/editor.component';
@@ -56,9 +57,7 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
       providers: [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(
-            '114997711738-goko2uke2ire5g3q64vm9cv6tpsc9dku.apps.googleusercontent.com'
-          )
+          provider: new GoogleLoginProvider( environment.googleOAuth)
         },
       ]
     } as SocialAuthServiceConfig,
