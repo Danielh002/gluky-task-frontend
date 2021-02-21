@@ -34,4 +34,3 @@ import { AppCommonService } from './services/app-common.service';
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('.content span').textContent).toContain('gluky-task-frontend app is running!');
   });
-});

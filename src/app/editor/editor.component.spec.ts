@@ -25,14 +25,9 @@ describe('EditorComponent', () => {
           return of([post])
         }
       }
-    },{
-      provide: AppCommonService,
-      useClass: AppCommonService,
-
-    },{
-      provide: MatDialog,
-      useValue: {}
-    }
+    },
+    { provide: AppCommonService, useClass: AppCommonService },
+    { provide: MatDialog, useValue: {} }
     ],
     declarations: [
       ProfileInfoComponent,
