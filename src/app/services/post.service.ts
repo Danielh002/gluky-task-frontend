@@ -41,6 +41,10 @@ export class PostService {
     return this.http.patch<Post[]>(environment.server + this.postRoute + '/' + postId, updateOp, { headers: this._httpHeader}).pipe(pluck('result'));
   }
 
+  deletePost(postId: string) : Observable<Post> {
+    return this.http.delete<Post[]>(environment.server + this.postRoute + '/' + postId, { headers: this._httpHeader}).pipe(pluck('result'));
+  }
+
   updateContentTitle(postId: string, newTitle: string, newContent: string) : Observable<Post> {
     let updateOp = [
       {"propName" : "tittle", "value": newTitle},

@@ -1,4 +1,4 @@
-<div class="col-md-12 gedf-main">
+<div *ngIf="user.role == 'EDITOR' || user.role == 'WRITER'" class="col-md-12 gedf-main">
     <form [formGroup]="addPostForm" class="card gedf-card">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -95,7 +95,7 @@
         </div>
         <div class="card-footer">
             <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+            <a *ngIf="user.role == 'EDITOR'" (click)='deletePost(post._id)' href="#" class="card-link"><i class="fa fa-mail-forward"></i> Delete</a>
             <app-comment class="card-link" [post]='post' [user]='currentUser' 
             ></app-comment>
         </div>

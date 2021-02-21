@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { noop } from 'rxjs';
 import { Post, Status } from '../../models/post.model';
 import { User } from '../../models/user.model';
 import { AppCommonService } from '../../services/app-common.service';
@@ -41,6 +40,13 @@ export class PostComponent implements OnInit {
     if (this.addPostForm.valid) {
       this.postService.addPost(this.user._id, this.addPostForm.get('postTittle').value, this.addPostForm.get('postContent').value, Status.PENDING).subscribe((_) =>this.openConfirmationDialog());
     }
+  }
+
+  deletePost(postId: string) {
+    this.postService.deletePost(postId).subscribe((_) => {
+      let index = this.posts.findIndex((element: Post) => element._id == postId );
+      this.posts.splice(index,1);
+    })
   }
 
   openConfirmationDialog(){
