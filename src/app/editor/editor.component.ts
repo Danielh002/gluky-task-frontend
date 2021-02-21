@@ -35,7 +35,7 @@ export class EditorComponent implements OnInit {
 
   updatePost(postId:string, newStatus: string ){
     let status : Status = Status[newStatus];
-    this.postService.updateStatus(postId, status).subscribe((result: Post) => {
+    this.postService.updateStatus(postId, status).subscribe((_) => {
       let index = this.pendingPosts.findIndex((element: Post) => element._id == postId );
       if( index > -1){
         this.pendingPosts[index].status = status;
