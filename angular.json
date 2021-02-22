@@ -42,6 +42,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "outputPath": "dist/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

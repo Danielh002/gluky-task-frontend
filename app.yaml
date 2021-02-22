@@ -1,22 +1,13 @@
+# [START runtime]
 runtime: python27
-api_version: 1
 threadsafe: yes
-
+# [END runtime]
 handlers:
-  - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
-    static_files: dist/gluky-task-frontend/\1
-    upload: dist/gluky-task-frontend/(.*)(|\.map)
-
-  - url: /(.*)
-    static_files: dist/gluky-task-frontend/index.html
-    upload: dist/gluky-task-frontend/index.html
-
+- url: /(.+)
+  static_files: dist/\1
+  upload: dist/(.*)
+- url: /
+  static_files: dist/index.html
+  upload: dist/index.html
 skip_files:
-  - e2e/
-  - node_modules/
-  - src/
-  - ^(.*/)?\..*$
-  - ^(.*/)?.*\.json$
-  - ^(.*/)?.*\.md$
-  - ^(.*/)?.*\.yaml$
-  - ^LICENSE
+- ^(?!dist)  # Skip any files not in the dist folder
