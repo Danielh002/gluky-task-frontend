@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   server: 'http://localhost:3000',
-  googleOAuth: '114997711738-goko2uke2ire5g3q64vm9cv6tpsc9dku.apps.googleusercontent.com'
+  googleOAuth: '114997711738-62e40gfl8ej2qdmfepe7s0l5o2scmigo.apps.googleusercontent.com'
 };
 
 /*
