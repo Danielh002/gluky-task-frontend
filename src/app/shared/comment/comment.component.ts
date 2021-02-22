@@ -33,7 +33,6 @@ export class CommentComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log(this.user);
     this.addCommentForm = new FormGroup({
       commentContent: new FormControl('', [Validators.required, Validators.minLength(1),]),
     });
