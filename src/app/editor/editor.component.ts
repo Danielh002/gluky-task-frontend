@@ -39,7 +39,9 @@ export class EditorComponent implements OnInit {
       let index = this.pendingPosts.findIndex((element: Post) => element._id == postId );
       if( index > -1){
         this.pendingPosts[index].status = status;
-        this.approvedPosts.push(this.pendingPosts[index]);
+        if(status == Status.APPROVED){
+          this.approvedPosts.push(this.pendingPosts[index]);
+        }
         this.pendingPosts.splice(index, 1);
       }
     })
