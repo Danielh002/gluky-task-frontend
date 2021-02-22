@@ -1,26 +1,39 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SocialAuthService } from 'angularx-social-login';
 import { AppComponent } from './app.component';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { EditorComponent } from './editor/editor.component';
 import { NoAuthenticatedViewComponent } from './no-authenticated-view/no-authenticated-view.component';
 import { AppCommonService } from './services/app-common.service';
+import { PostComponent } from './shared/post/post.component';
+import { ProfileInfoComponent } from './shared/profile-info/profile-info.component';
 import { WriterComponent } from './writer/writer.component';
 
 
  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent,
         AuthButtonComponent,
         NoAuthenticatedViewComponent,
         WriterComponent,
-        EditorComponent
+        EditorComponent,
+        PostComponent,
+        ProfileInfoComponent
       ],
-      providers: [AppCommonService]
+      providers: [AppCommonService, {       
+        provide: SocialAuthService,
+        useValue: {}
+      },
+      { provide: MatDialog, useValue: {} }
+    ]
     }).compileComponents();
   });
 
@@ -34,11 +47,4 @@ import { WriterComponent } from './writer/writer.component';
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('gluky-task-frontend');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('gluky-task-frontend app is running!');
   });
