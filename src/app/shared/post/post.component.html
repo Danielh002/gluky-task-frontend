@@ -96,8 +96,7 @@
         <div class="card-footer">
             <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
             <a *ngIf="user.role == 'EDITOR'" (click)='deletePost(post._id)' href="#" class="card-link"><i class="fa fa-mail-forward"></i> Delete</a>
-            <app-comment class="card-link" [post]='post' [user]='currentUser' 
-            ></app-comment>
+            <app-comment class="card-link" [post]='post' [user]='user'></app-comment>
         </div>
         
     </div>

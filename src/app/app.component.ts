@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Roles, User } from './models/user.model';
 import { AppCommonService } from './services/app-common.service';
-import { uniqueNamesGenerator, adjectives, colors, animals } from  'unique-names-generator';
 
 
 @Component({
@@ -12,27 +11,18 @@ import { uniqueNamesGenerator, adjectives, colors, animals } from  'unique-names
 export class AppComponent implements OnInit {
 
   title = 'gluky-task-frontend';
-  currentUser : User;
+  currentUser : User = {
+    name: "Loading",
+    email: "Loading",
+    role: Roles.NO_AUTH
+  }
 
   constructor(public appCommonService: AppCommonService){}
 
   ngOnInit() {
-    let randomName = uniqueNamesGenerator({
-      dictionaries: [adjectives, animals, colors], // colors can be omitted here as not used
-      length: 2
-    });
-
-    this.currentUser = {
-      name: randomName,
-      email: randomName+'@gmail.com',
-      role: Roles.NO_AUTH
-    }
-
     this.appCommonService.currentUser$.subscribe((user: User) => {
       this.currentUser = user
     })
-
-    this.appCommonService.updateUser(this.currentUser);
   }
 
   checkRole(role: string){
