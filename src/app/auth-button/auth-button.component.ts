@@ -3,7 +3,7 @@ import { UserService } from '../services/user.service';
 import { AppCommonService } from '../services/app-common.service';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { Roles, User } from '../models/user.model';
-
+import { uniqueNamesGenerator, adjectives, colors, animals } from  'unique-names-generator';
 
 @Component({
   selector: 'app-auth-button',
@@ -31,8 +31,17 @@ export class AuthButtonComponent {
 
   signOut(): void {
     if( this.currentUser){
+      let randomName = uniqueNamesGenerator({
+        dictionaries: [adjectives, animals, colors], // colors can be omitted here as not used
+        length: 2
+      });
+  
       this.authService.signOut();
-      this.currentUser.role = Roles.NO_AUTH
+      this.currentUser = {
+        name: randomName,
+        email: randomName+'@gmail.com',
+        role: Roles.NO_AUTH
+      }
       this.appCommonService.updateUser(this.currentUser);
       this.currentUser = undefined;
     }

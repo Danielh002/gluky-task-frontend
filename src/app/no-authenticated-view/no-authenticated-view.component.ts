@@ -28,7 +28,7 @@ export class NoAuthenticatedViewComponent implements OnInit {
 
     this.currentUser = {
       name: randomName,
-      email: randomName+'@gmail.com',
+      email: '',
       role: Roles.NO_AUTH
     }
 
