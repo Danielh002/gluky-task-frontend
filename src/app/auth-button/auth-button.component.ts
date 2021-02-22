@@ -39,7 +39,7 @@ export class AuthButtonComponent {
       this.authService.signOut();
       this.currentUser = {
         name: randomName,
-        email: randomName+'@gmail.com',
+        email: '',
         role: Roles.NO_AUTH
       }
       this.appCommonService.updateUser(this.currentUser);
