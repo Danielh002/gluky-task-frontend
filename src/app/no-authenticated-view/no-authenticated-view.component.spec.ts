@@ -42,8 +42,8 @@ describe('NoAuthenticatedViewComponent', () => {
     },
   }
   
-  test('should have title counter', async () => {
+  test('should have title TEXT', async () => {
     await render(NoAuthenticatedViewComponent, componentConfiguration)
-    expect(screen.getAllByText('Loading'))
+    expect(screen.getAllByText('Role: NO_AUTH'))
   })
 })

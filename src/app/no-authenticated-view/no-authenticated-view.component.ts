@@ -32,8 +32,6 @@ export class NoAuthenticatedViewComponent implements OnInit {
       role: Roles.NO_AUTH
     }
 
-    console.log('CURRENT', this.currentUser);
-
     this.appCommonService.currentUser$.subscribe((user: User) => {
       this.currentUser = user;
       this.postService.setHttpHeader(user.idToken)
